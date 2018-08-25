@@ -1,0 +1,15 @@
+button {
+    width: 150px;
+}
+
+thead {
+    color: #337AB7;
+}
+
+tbody:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.saved-plans {
+    font-size: 20px;
+}

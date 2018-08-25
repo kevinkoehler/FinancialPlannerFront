@@ -1,0 +1,51 @@
+<div class="card">
+    <div class="card-header saved-plans">
+        {{pageTitle}}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="planFilter" />
+            </div>
+        </div>
+        <br/>
+        <div class="table-responsive">
+            <table class="table" *ngIf="plans && plans.length">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Current Savings</th>
+                        <th>Goal</th>
+                        <th>Progress</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let plan of filteredPlans">
+                    <tr>
+                        <td>{{plan.name | titlecase }}</td>
+                        <td>{{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}</td>
+                        <td>
+                            {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
+                        </td>
+                        <td>
+                            <app-fp-progress [currentSavings]="plan.currentSavings" [goalSavings]="plan.goalSavings"></app-fp-progress>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" (click)="toggleDetails(plan)">
+                                {{plan.showDetails ? "Hide" : "View"}} Details
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                    <tr *ngIf="plan.showDetails">
+                        <td colspan="6">Showing Details Here</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
