@@ -1,9 +1,14 @@
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 export abstract class FpsService {
     protected baseUrl = environment.baseUrl;
+    protected httpOptions = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    };
 
     protected handleError(err: HttpErrorResponse) {
         let errorMessage = '';

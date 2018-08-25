@@ -1,22 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { PlanComponent } from './plan/plan.component';
-import { ProgressComponent } from './shared/progress.component';
+import { PlanModule } from './plan/plan.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PlanComponent,
-    ProgressComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: '', redirectTo: 'plans', pathMatch: 'full' },
+      { path: '**', redirectTo: 'plans', pathMatch: 'full' }
+    ]),
+    PlanModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

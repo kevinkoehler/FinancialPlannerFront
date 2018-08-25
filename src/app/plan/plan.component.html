@@ -1,9 +1,9 @@
 <div class="card">
-    <div class="card-header saved-plans">
+    <div class="card-header title">
         {{pageTitle}}
     </div>
     <div class="card-body">
-        <div class="row">
+        <div class="row filter">
             <div class="col-md-2">Filter by:</div>
             <div class="col-md-4">
                 <input type="text" [(ngModel)]="planFilter" />
@@ -11,19 +11,26 @@
         </div>
         <br/>
         <div class="table-responsive">
-            <table class="table" *ngIf="plans && plans.length">
+            <table class="table" *ngIf="filteredPlans && filteredPlans.length">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Current Savings</th>
                         <th>Goal</th>
                         <th>Progress</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody *ngFor="let plan of filteredPlans">
                     <tr>
-                        <td>{{plan.name | titlecase }}</td>
-                        <td>{{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}</td>
+                        <td>
+                            <a [routerLink]="['/plan', plan.id]">
+                                {{plan.name | titlecase}}
+                            </a>
+                        </td>
+                        <td>
+                            {{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}
+                        </td>
                         <td>
                             {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
                         </td>
@@ -42,7 +49,22 @@
                         </td>
                     </tr>
                     <tr *ngIf="plan.showDetails">
-                        <td colspan="6">Showing Details Here</td>
+                        <td colspan="3" style="text-align: left">
+                            <h5>Monthly Breakdown</h5>
+                            <ul>
+                                <li>Total monthly income: {{monthlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Total monthly expenses: {{monthlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li><u>Monthly Savings: {{monthlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+                            </ul>
+                        </td>
+                        <td colspan="3" style="text-align: left">
+                            <h5>Annual Breakdown</h5>
+                            <ul>
+                                <li>Total annual income: {{yearlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Total annual expenses: {{yearlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Annual Savings: <u>{{yearlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+                            </ul>
+                        </td>
                     </tr>
                 </tbody>
             </table>
