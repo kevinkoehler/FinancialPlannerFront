@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-fp-root',
+  selector: 'fp-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

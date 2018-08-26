@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-fp-progress',
+    selector: 'fp-progress',
     templateUrl: './progress.component.html',
     styleUrls: ['./progress.component.css']
 })

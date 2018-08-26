@@ -3,7 +3,7 @@ import { PlanComponent } from './plan.component';
 import { EntryListComponent } from '../entry/entry-list.component';
 import { RouterModule } from '@angular/router';
 import { EntryListGuard } from '../entry/entry-list.guard';
-import { SharedModule } from '../shared/shared.module';
+import { ProgressModule } from '../progress/progress.module';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { SharedModule } from '../shared/shared.module';
         component: EntryListComponent
       },
     ]),
-    SharedModule
+    ProgressModule
   ],
   declarations: [
     PlanComponent,

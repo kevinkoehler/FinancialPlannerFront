@@ -4,4 +4,11 @@ export interface IPlan {
     currentSavings: number;
     goalSavings: number;
     showDetails: boolean;
+    calculated: boolean;
+    monthlyIncomeTotal: number;
+    monthlyExpensesTotal: number;
+    monthlySavings: number;
+    yearlyIncomeTotal: number;
+    yearlyExpensesTotal: number;
+    yearlySavings: number;
 }

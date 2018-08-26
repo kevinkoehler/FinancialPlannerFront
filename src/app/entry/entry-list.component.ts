@@ -11,10 +11,10 @@ import { PlanService } from '../service/plan.service';
 export class EntryListComponent implements OnInit {
   pageTitle = 'Entries';
   plan: IPlan;
-  private entries: IEntry[];
+  entries: IEntry[];
   incomeEntries: IEntry[] = [];
   expenseEntries: IEntry[] = [];
-  private errorMessage;
+  errorMessage;
 
   constructor(private planService: PlanService,
     private route: ActivatedRoute,

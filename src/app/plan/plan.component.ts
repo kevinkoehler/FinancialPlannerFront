@@ -6,34 +6,26 @@ import { IEntry } from '../entry/entry';
 import { EntryService } from '../service/entry.service';
 
 @Component({
-  selector: 'app-fp-plan',
+  selector: 'fp-plan',
   templateUrl: './plan.component.html',
   styleUrls: ['./plan.component.css']
 })
 export class PlanComponent implements OnInit {
   pageTitle = 'Saved Plans';
-  private _planFilter = '';
-  private plans: IPlan[];
+  planFilterText = '';
+  plans: IPlan[];
   filteredPlans: IPlan[];
-  entries: IEntry[];
-  monthlyIncomeTotal = 0;
-  monthlyExpensesTotal = 0;
-  monthlySavings = 0;
-  yearlyIncomeTotal = 0;
-  yearlyExpensesTotal = 0;
-  yearlySavings = 0;
-  private errorMessage;
+  errorMessage;
 
-  constructor(private planService: PlanService,
-    private entryService: EntryService) { }
+  constructor(private planService: PlanService) { }
 
   get planFilter(): string {
-    return this._planFilter;
+    return this.planFilterText;
   }
 
   set planFilter(value: string) {
-    this._planFilter = value;
-    this.filteredPlans = this._planFilter.length ? this.performFilter(this.planFilter) : this.plans;
+    this.planFilterText = value;
+    this.filteredPlans = this.planFilterText.length ? this.performFilter(this.planFilter) : this.plans;
   }
 
   performFilter(filterBy: string): IPlan[] {
@@ -44,36 +36,42 @@ export class PlanComponent implements OnInit {
 
   toggleDetails(plan): void {
     plan.showDetails = !plan.showDetails;
-    if (plan.showDetails && this.entries == null) {
+    if (plan.showDetails && !plan.calculated) {
       this.planService.getEntries(plan.id).subscribe(
         entries => {
-          this.entries = entries;
-          this.calculateTotals();
+          this.calculateTotals(plan, entries);
         }
       );
     }
   }
 
-  calculateTotals(): void {
-    for (const entry of this.entries) {
+  calculateTotals(plan: IPlan, entries: IEntry[]): void {
+    plan.monthlyIncomeTotal = 0;
+    plan.monthlyExpensesTotal = 0;
+    plan.monthlySavings = 0;
+    plan.yearlyIncomeTotal = 0;
+    plan.yearlyExpensesTotal = 0;
+    plan.yearlySavings = 0;
+    for (const entry of entries) {
       if (entry.type === 'Income') {
         if (entry.frequency === 'Monthly') {
-          this.monthlyIncomeTotal += entry.amount;
-          this.yearlyIncomeTotal += entry.amount * 12;
+          plan.monthlyIncomeTotal += entry.amount;
+          plan.yearlyIncomeTotal += entry.amount * 12;
         } else if (entry.frequency === 'Annually') {
-          this.yearlyIncomeTotal += entry.amount;
+          plan.yearlyIncomeTotal += entry.amount;
         }
       } else if (entry.type === 'Expense') {
         if (entry.frequency === 'Monthly') {
-          this.monthlyExpensesTotal += entry.amount;
-          this.yearlyExpensesTotal += entry.amount * 12;
+          plan.monthlyExpensesTotal += entry.amount;
+          plan.yearlyExpensesTotal += entry.amount * 12;
         } else if (entry.frequency === 'Annually') {
-          this.yearlyExpensesTotal += entry.amount;
+          plan.yearlyExpensesTotal += entry.amount;
         }
       }
     }
-    this.monthlySavings = this.monthlyIncomeTotal - this.monthlyExpensesTotal;
-    this.yearlySavings = this.yearlyIncomeTotal - this.yearlyExpensesTotal;
+    plan.monthlySavings = plan.monthlyIncomeTotal - plan.monthlyExpensesTotal;
+    plan.yearlySavings = plan.yearlyIncomeTotal - plan.yearlyExpensesTotal;
+    plan.calculated = true;
   }
 
   ngOnInit(): void {

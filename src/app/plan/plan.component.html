@@ -35,7 +35,7 @@
                             {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
                         </td>
                         <td>
-                            <app-fp-progress [currentSavings]="plan.currentSavings" [goalSavings]="plan.goalSavings"></app-fp-progress>
+                            <fp-progress [currentSavings]="plan.currentSavings" [goalSavings]="plan.goalSavings"></fp-progress>
                         </td>
                         <td>
                             <button class="btn btn-primary" (click)="toggleDetails(plan)">
@@ -52,17 +52,17 @@
                         <td colspan="3" style="text-align: left">
                             <h5>Monthly Breakdown</h5>
                             <ul>
-                                <li>Total monthly income: {{monthlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Total monthly expenses: {{monthlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li><u>Monthly Savings: {{monthlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+                                <li>Total monthly income: {{plan.monthlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Total monthly expenses: {{plan.monthlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Monthly Savings: <u>{{plan.monthlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
                             </ul>
                         </td>
                         <td colspan="3" style="text-align: left">
                             <h5>Annual Breakdown</h5>
                             <ul>
-                                <li>Total annual income: {{yearlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Total annual expenses: {{yearlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Annual Savings: <u>{{yearlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+                                <li>Total annual income: {{plan.yearlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Total annual expenses: {{plan.yearlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                                <li>Annual Savings: <u>{{plan.yearlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
                             </ul>
                         </td>
                     </tr>
