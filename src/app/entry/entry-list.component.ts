@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { IPlan } from '../plan/plan';
-import { IEntry } from './entry';
-import { ActivatedRoute, Router } from '@angular/router';
-import { PlanService } from '../service/plan.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+
+import {PlanService} from '../service/plan.service';
+import {IPlan} from '../plan/plan';
+import {IEntry} from './entry';
 
 @Component({
   templateUrl: './entry-list.component.html',
@@ -16,17 +17,17 @@ export class EntryListComponent implements OnInit {
   expenseEntries: IEntry[] = [];
   errorMessage;
 
-  constructor(private planService: PlanService,
+  constructor(
+    private planService: PlanService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.planService.getPlanById(id).subscribe(
-      plan => {
-        this.plan = plan;
-      }
-    );
+    this.planService.getPlanById(id).subscribe(plan => {
+      this.plan = plan;
+    });
     this.planService.getEntries(id).subscribe(
       entries => {
         this.entries = entries;
@@ -38,7 +39,7 @@ export class EntryListComponent implements OnInit {
           }
         }
       },
-      error => this.errorMessage = <any>error
+      error => (this.errorMessage = <any>error)
     );
   }
 

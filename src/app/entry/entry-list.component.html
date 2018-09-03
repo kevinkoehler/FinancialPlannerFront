@@ -1,83 +1,83 @@
 <div class="card">
-    <div class="card-header title" *ngIf="plan">
-        <button class="btn btn-outline-secondary backButton" (click)="onBack()">
-            <i class="fa fa-chevron-left"></i>
-            Back
-        </button>
-        &nbsp;{{plan.name | titlecase}} {{pageTitle}}
+  <div class="card-header title" *ngIf="plan">
+    <button class="btn btn-outline-secondary backButton" (click)="onBack()">
+      <i class="fa fa-chevron-left"></i>
+      Back
+    </button>
+    &nbsp;{{plan.name | titlecase}} {{pageTitle}}
+  </div>
+  <div class="card-body" *ngIf="plan">
+    <div class="row planSummary">
+      Current Savings: {{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}
+      <br/> Goal: {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
     </div>
-    <div class="card-body" *ngIf="plan">
-        <div class="row planSummary">
-            Current Savings: {{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}
-            <br/> Goal: {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
-        </div>
-        <br/>
-        <div class="card-header tableTitle">
-            Income Sources
-        </div>
-        <div class="table-resonsive">
-            <table class="table" *ngIf="incomeEntries && incomeEntries.length">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Frequency</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let income of incomeEntries">
-                    <tr>
-                        <td>
-                            {{income.name | titlecase}}
-                        </td>
-                        <td>
-                            {{income.amount | currency:"USD":"symbol":"1.2-2"}}
-                        </td>
-                        <td>
-                            {{income.frequency}}
-                        </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <br/>
-        <div class="card-header tableTitle">
-            Expenses
-        </div>
-        <div class="table-resonsive">
-            <table class="table" *ngIf="expenseEntries && expenseEntries.length">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Amount</th>
-                        <th>Frequency</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let expense of expenseEntries">
-                    <tr>
-                        <td>
-                            {{expense.name | titlecase}}
-                        </td>
-                        <td>
-                            {{expense.amount | currency:"USD":"symbol":"1.2-2"}}
-                        </td>
-                        <td>
-                            {{expense.frequency}}
-                        </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <br/>
+    <div class="card-header tableTitle">
+      Income Sources
     </div>
+    <div class="table-resonsive">
+      <table class="table" *ngIf="incomeEntries && incomeEntries.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Frequency</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let income of incomeEntries">
+          <tr>
+            <td>
+              {{income.name | titlecase}}
+            </td>
+            <td>
+              {{income.amount | currency:"USD":"symbol":"1.2-2"}}
+            </td>
+            <td>
+              {{income.frequency}}
+            </td>
+            <td>
+              <button class="btn btn-primary">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <br/>
+    <div class="card-header tableTitle">
+      Expenses
+    </div>
+    <div class="table-resonsive">
+      <table class="table" *ngIf="expenseEntries && expenseEntries.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Frequency</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let expense of expenseEntries">
+          <tr>
+            <td>
+              {{expense.name | titlecase}}
+            </td>
+            <td>
+              {{expense.amount | currency:"USD":"symbol":"1.2-2"}}
+            </td>
+            <td>
+              {{expense.frequency}}
+            </td>
+            <td>
+              <button class="btn btn-primary">
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

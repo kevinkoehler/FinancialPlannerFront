@@ -1,24 +1,25 @@
 button {
-    width: 150px;
+  width: 150px;
 }
 
 thead {
-    color: #337AB7;
+  color: #337ab7;
 }
 
-th,td {
-    text-align: center;
-    width: 16.66%;
+th,
+td {
+  text-align: center;
+  width: 16.66%;
 }
 
 tbody:nth-child(even) {
-    background-color: #f2f2f2;
+  background-color: #f2f2f2;
 }
 
 .title {
-    font-size: 25px;
+  font-size: 25px;
 }
 
 .filter {
-    font-size: 20px;
+  font-size: 20px;
 }

@@ -1,73 +1,73 @@
 <div class="card">
-    <div class="card-header title">
-        {{pageTitle}}
+  <div class="card-header title">
+    {{pageTitle}}
+  </div>
+  <div class="card-body">
+    <div class="row filter">
+      <div class="col-md-2">Filter by:</div>
+      <div class="col-md-4">
+        <input type="text" [(ngModel)]="planFilter" />
+      </div>
     </div>
-    <div class="card-body">
-        <div class="row filter">
-            <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4">
-                <input type="text" [(ngModel)]="planFilter" />
-            </div>
-        </div>
-        <br/>
-        <div class="table-responsive">
-            <table class="table" *ngIf="filteredPlans && filteredPlans.length">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Current Savings</th>
-                        <th>Goal</th>
-                        <th>Progress</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody *ngFor="let plan of filteredPlans">
-                    <tr>
-                        <td>
-                            <a [routerLink]="['/plan', plan.id]">
-                                {{plan.name | titlecase}}
-                            </a>
-                        </td>
-                        <td>
-                            {{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}
-                        </td>
-                        <td>
-                            {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
-                        </td>
-                        <td>
-                            <fp-progress [currentSavings]="plan.currentSavings" [goalSavings]="plan.goalSavings"></fp-progress>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary" (click)="toggleDetails(plan)">
-                                {{plan.showDetails ? "Hide" : "View"}} Details
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-primary">
-                                Edit
-                            </button>
-                        </td>
-                    </tr>
-                    <tr *ngIf="plan.showDetails">
-                        <td colspan="3" style="text-align: left">
-                            <h5>Monthly Breakdown</h5>
-                            <ul>
-                                <li>Total monthly income: {{plan.monthlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Total monthly expenses: {{plan.monthlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Monthly Savings: <u>{{plan.monthlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
-                            </ul>
-                        </td>
-                        <td colspan="3" style="text-align: left">
-                            <h5>Annual Breakdown</h5>
-                            <ul>
-                                <li>Total annual income: {{plan.yearlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Total annual expenses: {{plan.yearlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
-                                <li>Annual Savings: <u>{{plan.yearlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <br/>
+    <div class="table-responsive">
+      <table class="table" *ngIf="filteredPlans && filteredPlans.length">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Current Savings</th>
+            <th>Goal</th>
+            <th>Progress</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let plan of filteredPlans">
+          <tr>
+            <td>
+              <a [routerLink]="['/plan', plan.id]">
+                {{plan.name | titlecase}}
+              </a>
+            </td>
+            <td>
+              {{plan.currentSavings | currency:"USD":"symbol":"1.2-2"}}
+            </td>
+            <td>
+              {{plan.goalSavings | currency:"USD":"symbol":"1.2-2"}}
+            </td>
+            <td>
+              <fp-progress [currentSavings]="plan.currentSavings" [goalSavings]="plan.goalSavings"></fp-progress>
+            </td>
+            <td>
+              <button class="btn btn-primary" (click)="toggleDetails(plan)">
+                {{plan.showDetails ? "Hide" : "View"}} Details
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-primary">
+                Edit
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="plan.showDetails">
+            <td colspan="3" style="text-align: left">
+              <h5>Monthly Breakdown</h5>
+              <ul>
+                <li>Total monthly income: {{plan.monthlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                <li>Total monthly expenses: {{plan.monthlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                <li>Monthly Savings: <u>{{plan.monthlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+              </ul>
+            </td>
+            <td colspan="3" style="text-align: left">
+              <h5>Annual Breakdown</h5>
+              <ul>
+                <li>Total annual income: {{plan.yearlyIncomeTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                <li>Total annual expenses: {{plan.yearlyExpensesTotal | currency:"USD":"symbol":"1.2-2"}}</li>
+                <li>Annual Savings: <u>{{plan.yearlySavings | currency:"USD":"symbol":"1.2-2"}}</u></li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

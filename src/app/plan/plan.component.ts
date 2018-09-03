@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
-import { IPlan } from './plan';
-import { PlanService } from '../service/plan.service';
-import { IEntry } from '../entry/entry';
-import { EntryService } from '../service/entry.service';
+import {IPlan} from './plan';
+import {PlanService} from '../service/plan.service';
+import {IEntry} from '../entry/entry';
 
 @Component({
   selector: 'fp-plan',
@@ -17,7 +16,7 @@ export class PlanComponent implements OnInit {
   filteredPlans: IPlan[];
   errorMessage;
 
-  constructor(private planService: PlanService) { }
+  constructor(private planService: PlanService) {}
 
   get planFilter(): string {
     return this.planFilterText;
@@ -25,23 +24,24 @@ export class PlanComponent implements OnInit {
 
   set planFilter(value: string) {
     this.planFilterText = value;
-    this.filteredPlans = this.planFilterText.length ? this.performFilter(this.planFilter) : this.plans;
+    this.filteredPlans = this.planFilterText.length
+      ? this.performFilter(this.planFilter)
+      : this.plans;
   }
 
   performFilter(filterBy: string): IPlan[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.plans.filter((plan: IPlan) =>
-      plan.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    return this.plans.filter(
+      (plan: IPlan) => plan.name.toLocaleLowerCase().indexOf(filterBy) !== -1
+    );
   }
 
   toggleDetails(plan): void {
     plan.showDetails = !plan.showDetails;
     if (plan.showDetails && !plan.calculated) {
-      this.planService.getEntries(plan.id).subscribe(
-        entries => {
-          this.calculateTotals(plan, entries);
-        }
-      );
+      this.planService.getEntries(plan.id).subscribe(entries => {
+        this.calculateTotals(plan, entries);
+      });
     }
   }
 
@@ -80,7 +80,7 @@ export class PlanComponent implements OnInit {
         this.plans = plans;
         this.filteredPlans = this.plans;
       },
-      error => this.errorMessage = <any>error
+      error => (this.errorMessage = <any>error)
     );
   }
 }
